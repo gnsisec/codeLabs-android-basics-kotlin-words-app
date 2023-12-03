@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Adapter for the [RecyclerView] in [DetailActivity].
  */
-class WordAdapter(private val letterId: String, context: Context) :
+class WordAdapter(context: Context) :
     RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
     private val filteredWords: List<String>
@@ -43,7 +43,7 @@ class WordAdapter(private val letterId: String, context: Context) :
             // Returns items in a collection if the conditional clause is true,
             // in this case if an item starts with the given letter,
             // ignoring UPPERCASE or lowercase.
-            .filter { it.startsWith(letterId, ignoreCase = true) }
+            .filter { it.startsWith('A', ignoreCase = true) }
             // Returns a collection that it has shuffled in place
             .shuffled()
             // Returns the first n items as a [List]
@@ -86,7 +86,7 @@ class WordAdapter(private val letterId: String, context: Context) :
 
         // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
         holder.button.setOnClickListener {
-            val queryUrl: Uri = Uri.parse("${DetailActivity.SEARCH_PREFIX}${item}")
+            val queryUrl: Uri = Uri.parse("${WordsListFragment.SEARCH_PREFIX}${item}")
             val intent = Intent(Intent.ACTION_VIEW, queryUrl)
             context.startActivity(intent)
         }
